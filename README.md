@@ -1,5 +1,5 @@
-# Simple Notes App
-This is a simple notes app built with React and Django.
+# Django Notes App - Dockerized
+This project is a simple Django Notes App that I built by following tutorials from youtube(Train with Shubham). The project demonstrates how to containerize a notes application using Docker and Docker Compose.
 
 ## Requirements
 1. Python 3.9
