@@ -1,0 +1,42 @@
+@Library("Shared") _
+pipeline{
+    
+    agent any
+    stages{
+        
+        stage ("Code"){
+            steps{
+                script{
+                    codeClone("https://github.com/LondheShubham153/django-notes-app.git/","main")
+                }
+            }
+        }
+        stage ("Build"){
+            steps{
+                script{
+                    building("notes-app","latest")
+                }
+            }
+        }
+        stage ("Push"){
+            steps{
+                echo "This is pushing the code to dockerhub........"
+                withCredentials([usernamePassword(
+                    'credentialsId':"dockerHubCred",
+                    passwordVariable:"dockerHubPass",
+                    usernameVariable:"dockerHubUser")]){
+                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
+                sh "docker image tag notes-app-jenkins:latest maniktyagis/notes-app-jenkins:latest"
+                sh "docker push maniktyagis/notes-app-jenkins:latest"
+                }
+            }
+        }
+        stage ("Deploy"){
+            steps{
+                script{
+                    deploying()
+                }
+            }
+        }
+    }
+}
