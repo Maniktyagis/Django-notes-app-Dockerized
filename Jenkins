@@ -7,7 +7,7 @@ pipeline{
         stage ("Code"){
             steps{
                 script{
-                    codeClone("https://github.com/LondheShubham153/django-notes-app.git/","main")
+                    codeClone("https://github.com/Maniktyagis/Django-notes-app-Dockerized.git","main")
                 }
             }
         }
